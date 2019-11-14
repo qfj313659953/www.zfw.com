@@ -27,19 +27,15 @@
 <div class="loginWraper">
 
     <div id="loginform" class="loginBox">
-        <div class="error">
-            @if($errors->any())
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            @endif
-        </div>
+
+        @include('admin.public.msg')
+
         <form class="form form-horizontal" action="{{ route('admin.login') }}" method="post">
             @csrf
             <div class="row cl">
                 <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
                 <div class="formControls col-xs-8">
-                    <input id="" name="username" value="" type="text" placeholder="账户" class="input-text size-L">
+                    <input id="" name="username" value="admin" type="text" placeholder="账户" class="input-text size-L">
                 </div>
             </div>
             <div class="row cl">
@@ -47,6 +43,11 @@
                 <div class="formControls col-xs-8">
                     <input id="" name="password" value="admin" type="password" placeholder="密码" class="input-text size-L">
                 </div>
+            </div>
+            <div class="row cl">
+                <div class="formControls col-xs-8 col-xs-offset-3">
+                    <input class="input-text size-L" type="text" name="captcha" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;">
+                    <img src="{{ captcha_src() }}" onclick="this.src='{{ captcha_src() }}?' + Math.random()"> <a id="kanbuq" href="javascript:;">看不清，换一张</a> </div>
             </div>
 
             <div class="row cl">
