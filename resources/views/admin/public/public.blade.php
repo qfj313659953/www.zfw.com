@@ -33,6 +33,11 @@
 <script type="text/javascript" src="{{ staticAdminPath() }}static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="{{ staticAdminPath() }}static/h-ui.admin/js/H-ui.admin.js"></script>
 
+<script>
+    setTimeout(function(){
+        $('.Huialert').remove();
+    },3000)
+</script>
 @yield('js')
 
 </body>

@@ -13,11 +13,11 @@ function staticAdminPath()
  * @param int $level
  * @return array
  */
-function treeLevel(array $data, int $pid = 0, string $html = '--', int $level = 0) {
+function treeLevel(array $data, int $pid = 0, string $html = '|--', int $level = 0) {
     static $arr = [];
     foreach ($data as $val) {
         if ($pid == $val['pid']) {
-            $val['html'] = str_repeat($html, $level * 2);
+            $val['html'] = str_repeat($html, $level * 1);
             $val['level'] = $level + 1;
             $arr[] = $val;
             treeLevel($data, $val['id'], $html, $val['level']);
@@ -38,7 +38,6 @@ function get_tree_list( array $data)
         $v['son'] = [];
         $tree[$v['id']] = $v;
     }
-
     //获取分类树
     foreach($tree as $k=>$v){
         $tree[$v['pid']]['son'][] = &$tree[$v['id']];

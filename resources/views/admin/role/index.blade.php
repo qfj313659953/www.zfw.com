@@ -16,6 +16,11 @@
                 <button type="submit" class="btn btn-success radius" id="" name="">
                     <i class="Hui-iconfont">&#xe665;</i> 搜索一下
                 </button>
+                <div id="search" style="display: none">
+                    <ul id="ul1">
+
+                    </ul>
+                </div>
             </div>
         </form>
 
@@ -25,8 +30,7 @@
                 {{--<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
                     <i class="Hui-iconfont">&#xe6e2;</i> 批量删除
                 </a>--}}
-                <a class="btn btn-primary radius" href="{{ route('admin.role.create') }}">
-                    <i class="Hui-iconfont">&#xe600;</i> 添加角色</a>
+                {!! $addbtn !!}
             </span>
         </div>
         <table class="table table-border table-bordered table-hover table-bg">
@@ -72,11 +76,30 @@
            var timer =  setTimeout(()=>{
                $.ajax({
                    url:"{{ route('admin.role.search') }}",
-                   data: {kw}
+                   data: {kw},
                }).then(ret=>{
-                   console.log(ret);
+                   let {status,data} = ret;
+                   let ul = $('#ul1');
+                   let ularray = [];
+                   if(status == 0){
+                       $(ul).empty();
+                       $.each(data,function(index,item){
+
+                           var li = $("<li></li>").html(item.name);
+                           ularray.push(item.name);
+                          /* $.each(item,function(name,val){
+                               console.log(val);
+                               var span = $("<span></span>").html(val);
+                               li.append(span);
+                               ularray.push(val.name);
+                           })*/
+                           ul.append(li);
+                       })
+                       ularray.sort();
+                       $('#search').css('display','block');
+                   }
                })
-           },2000)
+           },1000)
         });
 
     </script>

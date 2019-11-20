@@ -54,6 +54,19 @@
                 </div>
             </div>
             <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色：</label>
+                <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                    @foreach($roles as $id => $name)
+                        <div class="radio-box">
+                            <label>
+                                <input name="role_id" type="radio" value="{{ $id }}" @if($id == $data->role_id) checked @endif >
+                                {{ $name }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">修改密码</label>
                 <div class="formControls col-xs-8 col-sm-9 skin-minimal">
                     <div class="radio-box changepw">

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Role;
 use App\Model\Node;
-use App\Model\services\RoleService;
+use App\Model\Services\RoleService;
 
 class RoleController extends BaseController
 {
@@ -24,7 +24,8 @@ class RoleController extends BaseController
         dd($data);*/
 
         $data = (new RoleService())->getList($request,$this->pagesize);
-        return view('admin.role.index',compact('data'));
+        $addbtn = Role::addBtn('admin.role.create','角色');
+        return view('admin.role.index',compact('data','addbtn'));
     }
 
     //搜索
@@ -32,7 +33,8 @@ class RoleController extends BaseController
     {
         $kw = $request->get('kw');
         $data = Role::where('name','like',"%{$kw}%")->get();
-        return ['status' => 0,'data'=>$data];
+
+        return response()->json(['status' => 0,'data'=>$data]);
 
     }
 

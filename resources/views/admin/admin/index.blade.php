@@ -30,9 +30,10 @@
                 <a href="javascript:;" onclick="delAll()" class="btn btn-danger radius">
                     <i class="Hui-iconfont">&#xe6e2;</i> 批量删除
                 </a>
-                <a href="{{route('admin.user.create')}}" class="btn btn-primary radius">
-                    <i class="Hui-iconfont">&#xe600;</i> 添加用户
-                </a>
+{{--                <a href="{{route('admin.user.create')}}" class="btn btn-primary radius">--}}
+{{--                    <i class="Hui-iconfont">&#xe600;</i> 添加用户--}}
+{{--                </a>--}}
+                {!! $addbtn !!}
                 <a href="{{route('admin.user.restore')}}" class="btn btn-warning radius">
                      回收站
                 </a>
@@ -65,8 +66,8 @@
                     <td>{{$item->email}}</td>
                     <td>{{$item->created_at}}</td>
                     <td class="td-manage">
-                        <a href="{{ route('admin.user.edit',$item) }}" class="label label-secondary radius">修改</a>
-                        <a data-href="{{ route('admin.user.del',$item) }}" class="label label-danger radius deluser">删除</a>
+                        {!! $item->editBtn('admin.user.edit') !!}
+                        {!! $item->delBtn('admin.user.del') !!}
                     </td>
                 </tr>
                     @endforeach

@@ -44,6 +44,19 @@
                     <input type="text" class="input-text" placeholder="@" value="{{old('email')}}" name="email" id="email">
                 </div>
             </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色：</label>
+                <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                    @foreach($roles as $id => $name)
+                    <div class="radio-box">
+                        <label>
+                            <input name="role_id" type="radio" value="{{ $id }}">
+                            {{ $name }}
+                        </label>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
             <div id="password">
                 <div class="row cl">
                     <label class="form-label col-xs-4 col-sm-3">密码：</label>
@@ -70,6 +83,7 @@
 @endsection
 
 @section('js')
+
 
     <script type="text/javascript">
 

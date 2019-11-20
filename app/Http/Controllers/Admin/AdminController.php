@@ -8,6 +8,8 @@ use App\Model\Services\AdminService;
 #引入邮件类
 use Illuminate\Mail\Message;
 use Mail;
+#引入角色模型
+use App\Model\Role;
 
 
 class AdminController extends BaseController
@@ -17,14 +19,17 @@ class AdminController extends BaseController
     {
         $userid = auth()->id();
         $data = (new AdminService())->getList($request,$this->pagesize,$userid);
-
-        return view('admin.admin.index',compact('data'));
+        $addbtn = Admin::addBtn('admin.user.create','用户');
+        return view('admin.admin.index',compact('data','addbtn'));
 
     }
     //用户添加
     public function create()
     {
-        return view('admin.admin.create');
+        //获取所有的角色
+        $roles = Role::pluck('name','id');
+
+        return view('admin.admin.create',compact('roles'));
 
     }
 
@@ -36,7 +41,10 @@ class AdminController extends BaseController
             'email' => 'nullable|email',
             'password' => 'nullable|confirmed',
             'phone' => 'nullable|min:6',
-            'sex'   => 'in:先生,女士'
+            'sex'   => 'in:先生,女士',
+            'role_id' => 'required'
+        ],[
+            'role_id.required' => '必须选一个角色'
         ]);
        // dd($data);die;
         Admin::create($request->except(['_token','password_confirmation']));
@@ -52,8 +60,9 @@ class AdminController extends BaseController
     //用户修改展示
     public function edit(Request $request,int $id)
     {
+        $roles = Role::pluck('name','id');
         $data = Admin::find($id);
-        return view('admin.admin.edit',compact('data'));
+        return view('admin.admin.edit',compact('data','roles'));
 
     }
 
@@ -66,7 +75,10 @@ class AdminController extends BaseController
             'email' => 'nullable|email',
             'password' => 'nullable|confirmed',
             'phone' => 'nullable|min:6',
-            'sex'   => 'in:先生,女士'
+            'sex'   => 'in:先生,女士',
+            'role_id' => 'required'
+        ],[
+            'role_id.required' => '必须选一个角色'
         ]);
         if(!$data['password']){
             unset($data['password']);

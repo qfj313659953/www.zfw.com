@@ -13,6 +13,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::get('welcome', 'IndexController@welcome')->name('welcome');
         //退出登录
         Route::get('logout', 'IndexController@logout')->name('logout');
+        //文件上传
+        Route::post('base/upfile','BaseController@upfile')->name('base.upfile');
+        //点击删除图片
+        Route::get('base/delpic','BaseController@delpic')->name('base.delpic');
 
         //---用户管理---------------------------
         //个人信息展示
@@ -40,10 +44,22 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::delete('user/delAll','AdminController@delAll')->name('user.delAll');
 
         //-角色管理--------------------------------------
-        Route::resource('role','RoleController');
         Route::get('role/search','RoleController@search')->name('role.search');
+        Route::resource('role','RoleController');
         //-权限管理--------------------------------------
         Route::resource('node','NodeController');
+        //-文章管理--------------------------------------
+
+
+        Route::resource('article','ArticleController');
+        //-房源管理--------------------------------------
+        //房源属性
+        Route::resource('fangAttr','FangAttrController');
+        //房东属性
+        Route::resource('fangOwner','fangOwnerController');
+
+
+
 
     });
 

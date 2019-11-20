@@ -1,12 +1,13 @@
 <?php
 
 
-namespace App\Model\services;
+namespace App\Model\Services;
 
 use Illuminate\Http\Request;
 use App\Model\Admin;
 class AdminService
 {
+
     //用户列表搜索业务
     public function getList(Request $request,int $pagesize,int $userid = 1,int $recycle = 0)
     {

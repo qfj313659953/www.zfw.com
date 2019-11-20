@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Node;
-use App\Model\services\NodeService;
+use App\Model\Services\NodeService;
 
 class NodeController extends BaseController
 {
@@ -19,7 +19,8 @@ class NodeController extends BaseController
         //
         $data = (new NodeService())->getList($request)->toArray();
         $data = treeLevel($data);
-        return view('admin.node.index',compact('data'));
+        $addbtn = Node::addBtn('admin.node.create','权限');
+        return view('admin.node.index',compact('data','addbtn'));
     }
 
     /**
@@ -31,7 +32,11 @@ class NodeController extends BaseController
     {
         $data = Node::where('pid',0)->pluck('name','id')->toArray();
         //在数组顶部添加一个默认值
-        array_unshift($data,'==顶级==');
+        //array_unshift($data,'==顶级==');
+        $data[0] = '==顶级==';
+        //对数组按照键名排序
+        ksort($data);
+        //dump($data);
 
         return view('admin.node.create',compact('data'));
     }
