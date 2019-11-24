@@ -45,3 +45,29 @@ function get_tree_list( array $data)
     return isset($tree[0]['son'])?$tree[0]['son']:[];
 
 }
+/**
+ * @param  array $data
+ * @return 无限级树状结构,把某个字段名提取成下标
+ */
+
+function subTree(array $data, int $pid = 0){
+    $arr = [];
+    foreach ($data as $val) {
+        if ($pid == $val['pid']) {
+            $val['son'] = subTree($data,$val['id']);
+            $arr[] = $val;
+        }
+    }
+    return $arr;
+}
+
+function subTree2(array $data, int $pid = 0){
+    $arr = [];
+    foreach ($data as $val) {
+        if ($pid == $val['pid']) {
+            $val['son'] = subTree($data,$val['id']);
+            $arr[$val['field_name']] = $val;
+        }
+    }
+    return $arr;
+}

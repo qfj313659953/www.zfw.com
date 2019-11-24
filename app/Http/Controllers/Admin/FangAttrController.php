@@ -29,8 +29,9 @@ class FangAttrController extends Controller
      */
     public function create()
     {
-        $attrpid = FangAttr::where('pid',0)->pluck('name','id');
+        $attrpid = FangAttr::where('pid',0)->pluck('name','id')->toArray();
         $attrpid[0] = '==顶级==';
+        krsort($attrpid);
         return view('admin.fangAttr.create',compact('attrpid'));
     }
 

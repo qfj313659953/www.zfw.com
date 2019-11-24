@@ -14,4 +14,13 @@ class FangOwner extends Base
         FangOwner::observe(FangOwnerObserver::class);
     }
 
+    //获取器
+    public function getPicsAttribute()
+    {
+        $arr = explode('#',$this->attributes['pic']);
+        array_shift($arr);
+        return $arr;
+
+    }
+
 }

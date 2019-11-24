@@ -13,6 +13,8 @@ class FangAttrObserver
     {
         $field_name = request()->get('field_name');
         $fangAttr->field_name = $field_name == null ? '' : $field_name;
+        $icon = request()->get('icon');
+        $fangAttr->icon = $icon == null ? '' : $icon;
 
     }
 
@@ -21,6 +23,8 @@ class FangAttrObserver
     {
         $field_name = request()->get('field_name');
         $fangAttr->field_name = $field_name == null ? '' : $field_name;
+        $icon = request()->get('icon');
+        $fangAttr->icon = $icon == null ? '' : $icon;
 
     }
 

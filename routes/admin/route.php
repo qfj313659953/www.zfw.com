@@ -4,6 +4,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::get('login', 'LoginController@index')->name('login');
     //登录功能
     Route::post('login', 'LoginController@login')->name('login');
+    //创建索引
+    Route::get('esinit','EsController@initIndex')->name('esinit');
 
     //中间件绑定（检查是否已登录）
     Route::group(['middleware' => 'checklogin'], function () {
@@ -55,8 +57,18 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
         //-房源管理--------------------------------------
         //房源属性
         Route::resource('fangAttr','FangAttrController');
-        //房东属性
-        Route::resource('fangOwner','fangOwnerController');
+        //导出excel
+        Route::get('fangOwner/export','FangOwnerController@export')->name('fangOwner.export');
+        //房东
+        Route::resource('fangOwner','FangOwnerController');
+        //城市请求
+        Route::get('fang/getcity','FangController@getCity')->name('fang.getcity');
+        //房源
+        Route::resource('fang','FangController');
+
+        //预约
+        Route::resource('notice','NoticeController');
+
 
 
 

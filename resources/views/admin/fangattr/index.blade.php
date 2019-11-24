@@ -30,16 +30,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in lists" >
-                        <td v-text="item.id"></td>
-                        <td :style="'padding-left:'+(item.level*20)+ 'px'" v-text="item.name"></td>
-                        <td>
-                            <img :src="item.icon" style="width:100px" alt="">
-                        </td>
-                        <td v-html="item.actionBtn">
+                <tr v-for="item in lists" >
+                    <td v-text="item.id"></td>
+                    <td :style="'padding-left:'+(item.level*20)+ 'px'" v-text="item.name"></td>
+                    <td>
+                        <img :src="item.icon" style="width:100px" alt="">
+                    </td>
+                    <td v-html="item.actionBtn">
 
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
                 </tbody>
 
             </table>

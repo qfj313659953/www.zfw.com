@@ -68,6 +68,20 @@ return [
             //上传到服务器的位置
             'root' => public_path('uploads/'),
         ],
+        //房东导出excel
+        'fangownerexcel' => [
+            //驱动  本地文件
+            'driver' => 'local',
+            //上传到服务器的位置
+            'root' => public_path('uploads/fangownerexcel'),
+        ],
+        //房源
+        'fang' => [
+            //驱动  本地文件
+            'driver' => 'local',
+            //上传到服务器的位置
+            'root' => public_path('uploads/'),
+        ],
 
         'public' => [
             'driver' => 'local',

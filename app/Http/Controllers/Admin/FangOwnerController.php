@@ -3,18 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\FangOwnerRequest;
+use App\Jobs\FangOwnerExcelJob;
 use App\Model\FangOwner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+#引入导出的excel类
+use Maatwebsite\Excel\Facades\Excel;
+#引入导出数据类
+use App\Exports\FangOwnerExport;
 
-class FangOwnerController extends Controller
+class FangOwnerController extends BaseController
 {
     /**列表页
      */
     public function index()
     {
-        //
-        return '列表';
+        $excelpath = public_path('/uploads/fangownerexcel/fangowner.xlsx');
+        $isshow = file_exists($excelpath) ? true : false;
+        $data = FangOwner::paginate($this->pagesize);
+        $addBtn = FangOwner::addBtn('admin.fangOwner.create','房东');
+        return view('admin.fangOwner.index',compact('data','addBtn','excelpath','isshow'));
     }
 
     /**
@@ -49,7 +57,27 @@ class FangOwnerController extends Controller
      */
     public function show(FangOwner $fangOwner)
     {
-        //
+        $pics = $fangOwner->pic;
+        $arr = explode('#',$pics);
+        //判断是否存在图片
+        if(count($arr) <= 1){
+            return ['status'=>1,'msg'=>'图片不存在','data'=>[]];
+        }
+        array_shift($arr);
+        return ['status' => 0,'msg' => '成功','data'=>$arr];
+    }
+
+    public function export()
+    {
+        #导出并保存到服务器指定的磁盘中,参数3为文件保存的节点名称
+        $all = FangOwner::paginate(5)->toArray();
+        $num = $all['last_page'];
+        for($i = 1;$i<=$num;$i++){
+            $offset = ($i - 1) * 5;
+            $this->dispatch(new FangOwnerExcelJob($offset,$i));
+        }
+        return redirect(route('admin.fangOwner.index'));
+
     }
 
     /**
@@ -60,7 +88,8 @@ class FangOwnerController extends Controller
      */
     public function edit(FangOwner $fangOwner)
     {
-        //
+        //dd($fangOwner);
+        return view('admin.fangOwner.edit',compact('fangOwner'));
     }
 
     /**
@@ -72,7 +101,8 @@ class FangOwnerController extends Controller
      */
     public function update(Request $request, FangOwner $fangOwner)
     {
-        //
+        $fangOwner->update($request->except(['_token','_method','file']));
+        return redirect(route('admin.fangOwner.index'))->with('success','房东修改成功');
     }
 
     /**
@@ -83,6 +113,7 @@ class FangOwnerController extends Controller
      */
     public function destroy(FangOwner $fangOwner)
     {
-        //
+        $fangOwner->delete();
+        return ['status' => 0,'msg' => '房东信息删除成功'];
     }
 }

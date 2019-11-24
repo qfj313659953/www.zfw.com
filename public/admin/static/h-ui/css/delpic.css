@@ -10,7 +10,7 @@
 }
 .imgbox p {
     font-size:18px;
-    color: #fff;
+    color: red;
     position: absolute;
     cursor:pointer;
     right:8px;

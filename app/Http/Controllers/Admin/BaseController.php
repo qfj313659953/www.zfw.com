@@ -20,10 +20,11 @@ class BaseController extends Controller
     {
         //获取节点名称
         $nodename = $request->get('nodename');
+
         //获取上传表单文件域名称对应的对象
         $file = $request->file('file');
-        // dump($file);
         $url = $file->store($nodename,$nodename);
+
         return ['status' => 0,'url' => '/uploads/'.$url];
     }
 

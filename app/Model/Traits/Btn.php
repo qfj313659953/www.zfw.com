@@ -61,4 +61,13 @@ trait Btn
         return '';
     }
 
+    //查看按钮组件
+    public function showBtn(string $routename)
+    {
+        if(self::checkAuth($routename)){
+            return '<a href="'.route($routename,$this) .'" class="label label-success radius showbtn">查看</a>';
+        }
+        return '';
+    }
+
 }
