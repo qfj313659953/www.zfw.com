@@ -52,6 +52,15 @@ class FangObserver
         $fang->fang_config = implode(',',request()->get('fang_config'));
     }
 
+    //修改数据后修改es的内容
+    public function updated(Fang $fang)
+    {
+        //更新es数据与添加操作相同，所以直接调用即可
+        $this->created($fang);
+    }
+
+
+
     //封闭经纬度转化
     private function geo(){
         //获取第三方接口地址

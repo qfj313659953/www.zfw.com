@@ -1,20 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Exceptions\MyValidateException;
+use App\Model\FangOwner;
 use App\Model\Notice;
+use App\Model\Renting;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class NoticeController extends Controller
+class NoticeController extends BaseController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = Notice::with(['fangowner','renting'])->paginate($this->pagesize);
+        return view('admin.notice.index',compact('data'));
     }
 
     /**
@@ -22,8 +27,16 @@ class NoticeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        //获取数据
+        if($request->ajax()){
+            //房东数据
+            $fdata = FangOwner::all();
+            //租客数据
+            $rdata = Renting::all();
+            return [$fdata,$rdata];
+        }
         return view('admin.notice.create');
     }
 
@@ -35,7 +48,22 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $this->validate($request,[
+               'cnt' => 'required'
+            ]);
+
+            //入库操作
+            Notice::create($request->except('_token'));
+
+            return ['status'=>0,'msg'=>'成功','url'=>route('admin.notice.index')];
+
+
+        }catch (\Exception $e){
+           throw new MyValidateException('数据异常',3);
+        }
+
+
     }
 
     /**

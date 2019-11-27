@@ -16,4 +16,14 @@ class Base extends Model
     //定义黑名单
     protected $guarded = [];
 
+    //前缀域名
+    protected static $host;
+
+    protected static function boot()
+    {
+        parent::boot();
+        self::$host = env('APP_URL');
+    }
+
+
 }

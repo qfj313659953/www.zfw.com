@@ -69,7 +69,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
         //预约
         Route::resource('notice','NoticeController');
 
-
+        //接口账号表
+        Route::resource('apiuser','ApiuserController');
 
 
 

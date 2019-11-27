@@ -82,6 +82,13 @@ return [
             //上传到服务器的位置
             'root' => public_path('uploads/'),
         ],
+        //个人身份证信息
+        'renting' => [
+            //驱动  本地文件
+            'driver' => 'local',
+            //上传到服务器的位置
+            'root' => public_path('uploads/renting'),
+        ],
 
         'public' => [
             'driver' => 'local',
