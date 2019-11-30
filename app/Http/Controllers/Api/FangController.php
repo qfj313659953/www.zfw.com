@@ -63,6 +63,7 @@ class FangController extends BaseController
         }
 
         $data = Fang::where('id',$data['id'])->first();
+        return $data;
 
     }
 

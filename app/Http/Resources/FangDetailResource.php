@@ -26,7 +26,8 @@ class FangDetailResource extends JsonResource
             'fangowner' => $this->fangOwner,
             'year' => new FangAttrResource($this->year),
             'config' =>new FangAttrResource($this->config),
-            ''
+            'latitude' =>$this->latitude,
+            'longitude' => $this->longitude
 
         ];
     }

@@ -88,12 +88,7 @@ class RentingController extends Controller
             if(is_file($img)){
                 unlink($img);
             }
-            /*$cardimg = array_merge(array_diff($cardimg,array($data['cardimg'])));
-          //  return $cardimg;
-            $cardimg = array_map(function($item){
-                $str = str_replace(env('APP_URL'),'',$item);
-                return $str;
-            },$cardimg);*/
+
         }
 
         return ['status' => 0,'msg'=>'图片删除成功'];
