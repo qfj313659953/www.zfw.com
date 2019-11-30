@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Renting;
 use App\Exceptions\MyValidateException;
+use function foo\func;
 
 class RentingController extends Controller
 {
@@ -41,7 +42,7 @@ class RentingController extends Controller
                /* 'is_auth' => 'required'*/
             ]);
         }catch(\Exception $e){
-            dump($e->validator->messages());
+            //dump($e->validator->messages());
             throw new MyValidateException('数据异常,验证不通过',3);
         }
 
@@ -69,6 +70,34 @@ class RentingController extends Controller
         $resulte = Renting::where('openid',$data['openid'])->first();
         if(!$resulte) throw new LoginException('没有查询到信息',4);
         return ['status' => 0,'msg'=>'信息查询成功','userinfo'=>$resulte];
+    }
+    //删除图片
+    public function delImg(Request $request)
+    {
+        try{
+            $data = $this->validate($request,[
+               'openid' => 'required',
+                'cardimg' => 'required'
+            ]);
+        }catch(\Exception $e){
+            throw new MyValidateException('数据异常',3);
+        }
+        $cardimg = Renting::where('openid',$data['openid'])->value('card_img');
+        if(in_array($data['cardimg'],$cardimg)){
+            $img = str_replace(env('APP_URL'),'.',$data['cardimg']);
+            if(is_file($img)){
+                unlink($img);
+            }
+            /*$cardimg = array_merge(array_diff($cardimg,array($data['cardimg'])));
+          //  return $cardimg;
+            $cardimg = array_map(function($item){
+                $str = str_replace(env('APP_URL'),'',$item);
+                return $str;
+            },$cardimg);*/
+        }
+
+        return ['status' => 0,'msg'=>'图片删除成功'];
+
     }
 
 

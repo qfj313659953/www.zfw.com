@@ -12,7 +12,7 @@ trait Btn
     static private function checkAuth(string $routename)
     {
         //在中间件中得到当前角色持有的权限列表
-        $auths = request()->auths;
+        $auths = request()->auths ?? [];
         if(!in_array($routename,$auths) && request()->username != 'admin'){
             return false;
         }

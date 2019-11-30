@@ -39,4 +39,36 @@ class Fang extends Base
 
     }
 
+    //房源图片处理
+    public function getFangPicAttribute()
+    {
+        $arr = explode('#',$this->attributes['fang_pic']);
+       array_shift($arr);
+       return $this->attributes['fang_pic'] = array_map(function($value){
+           if(stristr($value,'http')){
+               return $value;
+           }
+           return self::$host . '/' . ltrim($value,'/');
+       },$arr);
+    }
+
+    public function dir(){
+        return $this->belongsTo(FangAttr::class,'fang_direction','id');
+    }
+
+    public function year()
+    {
+        return $this->belongsTo(FangAttr::class,'fang_year','id');
+
+    }
+    public function config()
+    {
+       return FangAttr::whereIn('id',$this->attributes['fang_config'])->first();
+
+    }
+
+
+
+
+
 }

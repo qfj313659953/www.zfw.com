@@ -22,5 +22,16 @@ class FangAttr extends Base
 
     }
 
+    public function getIconAttribute()
+    {
+        if(stristr($this->attributes['icon'],'http')){
+            return $this->attributes['icon'];
+        }
+        return self::$host .'/'.ltrim($this->attributes['icon'],'/');
+    }
+
+
+
+
 
 }

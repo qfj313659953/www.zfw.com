@@ -56,12 +56,36 @@ Route::group(['prefix'=>'v1','namespace'=>'Api'],function(){
     Route::post('userinfo','WxloginController@userinfo');
     //图片上传
     Route::post('upfile','RentingController@upfile');
+    //删除图片
+    Route::get('delImg','RentingController@delImg');
     //租客信息上传
     Route::put('edituser','RentingController@edituser');
     //根据openid获取租客信息
     Route::get('getrenting','RentingController@getrenting');
     //看房通知的列表
     Route::get('notices','NoticeController@index');
+    //采集数据
+    Route::get('sipder','NoticeController@sipder');
+    //记录用户浏览次数
+    Route::post('articles/history','ArticleController@history');
+    //资讯详情
+    Route::get('articles/{article}','ArticleController@show');
+    //资讯列表
+    Route::get('articles','ArticleController@index');
+    //推荐房源
+    Route::get('fang/recommend','FangController@recommend');
+    //获取租赁方式
+    Route::get('fang/fangattr','FangController@fangattr');
+    //获取租房小组
+    Route::get('fang/group','FangController@group');
+    //获取房源列表
+    Route::get('fang/list','FangController@list');
+    //获取房源详情
+    Route::get('fang/detail','FangController@detail');
+
+
+
+
 
 });
 
