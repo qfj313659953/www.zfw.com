@@ -82,17 +82,11 @@ class RentingController extends Controller
         }catch(\Exception $e){
             throw new MyValidateException('数据异常',3);
         }
-        $cardimg = Renting::where('openid',$data['openid'])->value('card_img');
-        if(in_array($data['cardimg'],$cardimg)){
-            $img = str_replace(env('APP_URL'),'.',$data['cardimg']);
-            if(is_file($img)){
-                unlink($img);
-            }
-
+        $img = str_replace(env('APP_URL'),'.',$data['cardimg']);
+        if(is_file($img)){
+            unlink($img);
         }
-
         return ['status' => 0,'msg'=>'图片删除成功'];
-
     }
 
 

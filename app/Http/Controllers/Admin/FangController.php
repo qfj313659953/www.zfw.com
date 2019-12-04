@@ -21,6 +21,7 @@ class FangController extends BaseController
     {
         $data = Fang::with('fangOwner')->paginate($this->pagesize);
         $addBtn = Fang::addBtn('admin.fang.create','房源');
+      //  dump($addBtn);
         return view('admin.fang.index',compact('data','addBtn'));
     }
 
@@ -91,13 +92,15 @@ class FangController extends BaseController
         $Pdata = $this->getCity();
         //获取市
         $cdata = $this->getCity($fang->fang_province);
-        dump($fang->fang_province);
+       // dump($fang->fang_province);
         //获取区
         $rdata = $this->getCity($fang->fang_city);
 
         //获取房源属性
         $attrs = FangAttr::all()->toArray();
+
         $attrs = subtree2($attrs);
+
         //获取房源房东
         $owner = FangOwner::all();
 
@@ -113,6 +116,7 @@ class FangController extends BaseController
      */
     public function update(Request $request, Fang $fang)
     {
+
         $fang->update($request->except(['_token','_method','file','fang_addr2']));
         return redirect(route('admin.fang.index'))->with('success','修改成功');
     }

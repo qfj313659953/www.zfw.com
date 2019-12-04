@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\Fang;
 use App\Model\Node;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -36,7 +37,22 @@ class IndexController extends Controller
     //欢迎页
     public function welcome()
     {
-        return view('admin.index.welcome')->with('success','登录成功');
+        //已租
+        $count1 = Fang::where('fang_status',1)->count();
+        //未租
+        $count2 = Fang::where('fang_status',0)->count();
+
+        //拼接图片所需数据
+        $legend = "'已租','未租'";
+        $data = [
+            ['value' => $count1,'name' => '已租'],
+            ['value' => $count2,'name' => '未租']
+        ];
+        $data = json_encode($data,JSON_UNESCAPED_UNICODE);
+
+
+
+        return view('admin.index.welcome',compact('data','legend'))->with('success','登录成功');
     }
 
     //退出登录

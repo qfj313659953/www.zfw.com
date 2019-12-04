@@ -52,20 +52,18 @@ class Fang extends Base
        },$arr);
     }
 
+    public function getFangPicsAttribute()
+    {
+        return $this->attributes['fang_pic'];
+    }
+
     public function dir(){
         return $this->belongsTo(FangAttr::class,'fang_direction','id');
     }
 
-    public function year()
-    {
-        return $this->belongsTo(FangAttr::class,'fang_year','id');
 
-    }
-    public function config()
-    {
-       return FangAttr::whereIn('id',$this->attributes['fang_config'])->first();
 
-    }
+
 
 
 

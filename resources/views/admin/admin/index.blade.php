@@ -85,11 +85,12 @@
     <script>
         const _token = "{{ csrf_token() }}";
         $('.deluser').click(function(){
-            let url = $(this).attr('data-href');
+            let url = $(this).attr('href');
             //console.log(url);
             layer.confirm('您确定要删除该账号吗？',{
                 btn : ['确定','不删']
             },()=>{   //箭头函数保证this的指向不变
+
                 $.ajax({
                     url,
                     type:'delete',

@@ -18,7 +18,7 @@ class FangObserver
 
     }
     //添加数据之后
-  /*  public function created(Fang $fang)
+   /* public function created(Fang $fang)
     {
         //添加文档
         $hosts = config('es.hosts');
@@ -53,7 +53,7 @@ class FangObserver
     }
 
     //修改数据后修改es的内容
-  /*  public function updated(Fang $fang)
+   /* public function updated(Fang $fang)
     {
         //更新es数据与添加操作相同，所以直接调用即可
         $this->created($fang);

@@ -72,6 +72,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
         //接口账号表
         Route::resource('apiuser','ApiuserController');
 
+        //看房记录表
+        Route::get('collect','CollectController@index')->name('collect.index');
+
 
 
     });

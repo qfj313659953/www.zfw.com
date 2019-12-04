@@ -21,6 +21,9 @@ class Renting extends Base
         $imglist = [];
         if(strstr($this->attributes['card_img'],'#')){
             $imglist = explode('#',$this->attributes['card_img']);
+            //dump($imglist);
+           // array_shift($imglist);
+           // dump($imglist);
             $imglist = array_map(function($item){
                 return self::$host . $item;
             },$imglist);

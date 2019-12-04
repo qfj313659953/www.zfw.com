@@ -49,7 +49,7 @@ use Illuminate\Http\Request;
 
 });*/
 //restful接口uri，有版本，有前缀
-Route::group(['prefix'=>'v1','namespace'=>'Api'],function(){
+Route::group(['prefix'=>'v1','namespace'=>'Api','middleware'=>['checkapi']],function(){
     //实现小程序的登录
     Route::post('wxlogin','WxloginController@wxlogin');
     //小程序授权
@@ -82,6 +82,29 @@ Route::group(['prefix'=>'v1','namespace'=>'Api'],function(){
     Route::get('fang/list','FangController@list');
     //获取房源详情
     Route::get('fang/detail','FangController@detail');
+    //添加或取消收藏
+    Route::get('fang/fav','FavController@fav');
+    //查看是否已收藏此房源
+    Route::get('fang/isFav','FavController@isFav');
+
+    //确认看房
+    Route::post('fang/collect','CollectController@index');
+    //查看是否已看房
+    Route::get('fang/isCollect','CollectController@isCollect');
+
+    //房源属性路由
+    Route::get('fang/attrs','FangController@fangAttrs');
+
+    //根据搜索条件获取房源
+    Route::get('fang/search','FangController@search');
+    //根据关键词搜索房源
+    Route::get('fang/searchkw','FangController@searchkw');
+
+
+    //用户列表
+    Route::get('admin/list','AdminController@index');
+    //根据id获取用户信息
+    Route::get('admin/{admin}','AdminController@show');
 
 
 

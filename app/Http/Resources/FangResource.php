@@ -23,7 +23,7 @@ class FangResource extends JsonResource
              'room' => $this->fang_shi.'室'.$this->fang_ting.'厅',
             'img' => $this->fang_pic[0],
             'rent' => $this->fang_rent,
-            'dir' =>new FangAttrResource($this->dir)
+            //'dir' =>new FangAttrResource($this->dir)
 
 
 

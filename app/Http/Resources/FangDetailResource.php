@@ -20,15 +20,17 @@ class FangDetailResource extends JsonResource
             'xiaoqu' =>$this->fang_xiaoqu,
             'area' =>$this->fang_build_area,
             'room' => $this->fang_shi.'室'.$this->fang_ting.'厅'.$this->fang_wei.'卫',
-            'img' => $this->fang_pic[0],
+            'floor' => $this->fang_floor,
+            'img' => $this->fang_pic,
             'rent' => $this->fang_rent,
             'dir' =>new FangAttrResource($this->dir),
             'fangowner' => $this->fangOwner,
-            'year' => new FangAttrResource($this->year),
-            'config' =>new FangAttrResource($this->config),
+             'year' => $this->fang_year,
             'latitude' =>$this->latitude,
-            'longitude' => $this->longitude
-
+            'longitude' => $this->longitude,
+            'configs' => $this->configs,
+            'desn' => $this->fang_desn,
+            'date' => date('Y-m-d',strtotime($this->created_at))
         ];
     }
 }

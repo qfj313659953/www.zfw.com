@@ -262,7 +262,7 @@
                 <div class="formControls col-xs-8 col-sm-9">
                     <div class="uploader-thum-container">
                         <div id="filePicker">选择图片</div>
-                        <input type="hidden" value="{{ $fang->fang_pic }}" name="fang_pic" id="pic">
+                        <input type="hidden" value="{{ $fang->fang_pics }}" name="fang_pic" id="pic">
                         <div id="imgList">
                             @foreach($fang->pics as $src)
                                 <div class="imgbox">
