@@ -11,12 +11,6 @@ class CollectController extends BaseController
     //看房确认列表
     public function index(Request $request)
     {
-        echo null == false ? '相等' : '不';
-        die;
-
-
-
-
         //时间
         $st = $request->get('st');
         $et = $request->get('et');

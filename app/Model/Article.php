@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Observers\ArticleObserver;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -9,6 +10,13 @@ class Article extends Base
 {
     //给模型动态添加一个对象属性
     protected $appends = ['actionBtn','dt'];
+
+    protected static function boot()
+    {
+        parent::boot();
+        self::observe(ArticleObserver::class);
+    }
+
 
     public function cates()
     {
