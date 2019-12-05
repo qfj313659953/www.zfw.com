@@ -30,7 +30,6 @@ class IndexController extends Controller
         }
         //转化成树状级
         $menuData = get_tree_list($authData);
-
         return view('admin.index.index',compact('menuData'));
     }
 
