@@ -9,6 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Maatwebsite\Excel\Facades\Excel;
+use ZipArchive;
 
 class FangOwnerExcelJob implements ShouldQueue
 {
@@ -32,5 +33,6 @@ class FangOwnerExcelJob implements ShouldQueue
     public function handle()
     {
         Excel::store(new FangOwnerExport($this->offset),'fangowner'.$this->i.'.xlsx','fangownerexcel');
+
     }
 }
